@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -62,13 +61,13 @@
     <div class="row">
         <video-js id=example-video width=960 height=540 class="vjs-default-skin" controls>
             <source
-                    src="https://youku.com-okzy.com/20190630/10266_cb5c9077/index.m3u8"
+                    src="${video.link}"
                     type="application/x-mpegURL">
         </video-js>
 
     </div>
-    <h4>ssssssss</h4>
-    <span class="text-muted">ssss:xxxx</span><span class="text-muted">ssss:xxxx</span><span class="text-muted">ssss:xxxx</span>
+    <h4>${video.title}</h4>
+    <span class="text-muted">${video.orderName}</span><span class="text-muted">ssss:xxxx</span><span class="text-muted">ssss:xxxx</span>
 
 
         <h4>播放列表</h4>

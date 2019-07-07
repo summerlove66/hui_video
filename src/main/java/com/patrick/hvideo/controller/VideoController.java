@@ -13,16 +13,16 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@Controller
 public class VideoController {
     @Resource
     private VideoMapper videoMapper;
@@ -34,11 +34,14 @@ public class VideoController {
 
     @GetMapping("/video/{videoId}")
 
-    public Video getVideoByID(@PathVariable int videoId) {
-        return videoMapper.findById(videoId);
+    public String getVideoByID(@PathVariable int videoId , Model model) {
+        Video video = videoMapper.findById(videoId);
+
+        model.addAttribute("video",video);
+        return "play";
     }
 
-
+    @ResponseBody
     @GetMapping("/col/{videoColId}")
     public VideoColumn getVideoColumnByID(@PathVariable("videoColId") int videoColId) {
         return videoColumnMapper.findVideoColumnById(videoColId);
@@ -56,19 +59,19 @@ public class VideoController {
         return new VideoGroup(videoColumn, videoList);
     }
 
-    @GetMapping("cols/page/{pageNum}")
-    public VideoPage getVideoColumnByPage(@PathVariable("pageNum") int pageNum  ,
-                                           VideoColumn videoColumn) {
+    @GetMapping("cols")
+    public String getVideoColumnByPage(@RequestParam(name = "pn" ,defaultValue ="1" ,required = false) int pageNum  , Model model,
+                                          VideoColumn videoColumn) {
 
         System.out.println("VIDEOCOLUMN " + videoColumn);
         List<VideoColumn> videoColumnList;
 
         Page<?> page = PageHelper.startPage(pageNum,pageSize);
         videoColumnList = videoColumnMapper.findVideoColByRange(videoColumn);
-        VideoPage videoPage = new VideoPage();
-        videoPage.setPage(page.getPageNum());
-        videoPage.setVideoColumnList(videoColumnList);
-        return videoPage;
+        model.addAttribute("videoColumnList" ,videoColumnList);
+        model.addAttribute("page" ,page.getPageNum());
+
+        return "tt";
 
     }
 
