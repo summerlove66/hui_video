@@ -18,10 +18,11 @@ public interface VideoMapper {
     })
 
     @Select("SELECT * FROM video WHERE id= #{videoId}")
-    Video findById(@Param("videoId") int videoId);
+    Video findById(@Param("videoId") int videoId );
+
 
     @ResultMap(value = "videoMap")
-    @Select("SELECT * FROM video WHERE source= #{source} AND data_id=#{dataId}")
+    @Select("SELECT * FROM video WHERE source= #{source} AND data_id=#{dataId}  ORDER BY video_order")
     List<Video> findBySourceAndDataId(@Param("source") String source , @Param("dataId") String dataId);
 
 

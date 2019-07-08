@@ -3,6 +3,7 @@ package com.patrick.hvideo.model;
 import java.util.List;
 
 public class VideoPage {
+
     private int page;
 
     private List<VideoColumn> videoColumnList;

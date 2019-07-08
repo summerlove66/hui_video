@@ -23,7 +23,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link text-success font-weight-bold" href="#">首页<span
-                            class="sr-only">(current)</span></a>
+                                class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">福利</a>
@@ -67,18 +67,20 @@
 
     </div>
     <h4>${video.title}</h4>
-    <span class="text-muted">${video.orderName}</span><span class="text-muted">ssss:xxxx</span><span class="text-muted">ssss:xxxx</span>
+    <span class="text-muted">${video.orderName}</span> <span class="text-muted">类型：${videoCol.contType}</span><span class="text-muted">地区: ${videoCol.area}</span><span
+            class="text-muted">年份: ${videoCol.year}</span>
 
 
-        <h4>播放列表</h4>
-        <ul class="list-inline" >
-            <li class="list-inline-item border"><a href="" class="p-2 ">22</a></li>
-            <li class="list-inline-item border"><a href="" class="p-2">2</a></li>
-            <li class="list-inline-item border"><a href="" class="p-2">333</a></li>
-
-        </ul>
-
-
+    <h4>播放列表</h4>
+    <ul class="list-inline">
+        <#list videoList as vd>
+            <#if video.videoId == vd.videoId >
+                <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
+                                                       class="badge badge-primary p-2">${vd.orderName}</a></li>
+            </#if>
+            <li class="list-inline-item border"><a href="/video/${vd.videoId?c}" class="badge badge-light p-2 ">${vd.orderName}</a></li>
+        </#list>
+    </ul>
 
 
 </div>
