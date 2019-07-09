@@ -13,7 +13,7 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
-        <a class="display-1 navbar-brand" href="#">HUIDO </a>
+        <a class="display-1 navbar-brand" href="/cols">HUIDO </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul id="videoType" class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-success font-weight-bold" href="#">首页<span
+                    <a class="nav-link text-success font-weight-bold" href="/cols">首页<span
                                 class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item text-weight-bold">
@@ -111,18 +111,7 @@
 </div>
 
 </body>
-<script>
-    var player = videojs('example-video');
-    player.play();
-    $(function () {
-        $("#skip-page").click(
-            function () {
-                window.location.href = urlInfo.url.replace("pn=" + pn, "pn=" + $("#page li input").last().val());
-            }
-        )
 
-    })
-</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -132,4 +121,32 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<script>
+    var player = videojs('example-video');
+    player.play();
+
+    $("source").attr("src", ${video.link});
+
+
+    $(function () {
+        $("#skip-page").click(
+            search()
+        );
+
+
+        $(document).keypress(
+            function (event) {
+
+                keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode === 13) {
+                    search();
+                }
+
+
+            }
+        )
+
+
+    })
+</script>
 </html>

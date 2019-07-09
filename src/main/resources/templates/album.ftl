@@ -18,7 +18,7 @@
 
 
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
-        <a class="display-1 navbar-brand" href="#">HUIDO </a>
+        <a class="display-1 navbar-brand" href="/cols">HUIDO </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -134,7 +134,7 @@
 
     <div class="row pt-5">
 
-        <div class="col-md-4 offset-4">
+        <div class="col-md-6 mx-auto">
             <ul id="page" class="list-inline">
                 <li class="list-inline-item ">
                     <button class="btn btn-outline-secondary"><a>首页</a></button>
@@ -186,7 +186,8 @@
 
 </body>
 
-
+<script src="/statics/js/album.js"></script>
+<script src="/statics/js/index.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -203,80 +204,6 @@
     let pn = parseInt(urlInfo.pn);
 
     pageSetup();
-
-    function pageSetup() {
-        let preLink, nextLink, firstLink;
-        firstLink = urlInfo.url.replace("pn=" + pn, "pn=1");
-        nextLink = urlInfo.url.replace("pn=" + pn, "pn=" + (pn + 1));
-
-        if (pn > 1) {
-            preLink = urlInfo.url.replace("pn=" + pn, "pn=" + (pn - 1));
-
-            $("#page li:eq(1) button a").attr("href", preLink);
-
-        }
-
-        if (urlInfo.title) {
-            $("form input").val(urlInfo.title);
-        }
-        $("#page li:eq(0) button a").attr("href", firstLink);
-        $("#page li:eq(2) button a").html(pn);
-        $("#page li:eq(3) button a").attr("href", nextLink);
-
-
-    }
-
-
-    function parseUrl(ur) {
-        let urlInfo = {};
-        infoArray = ur.split(new RegExp("\\?|&")).slice(1);
-        for (let i in  infoArray) {
-            let kv = infoArray[i].split("=");
-
-            console.log(kv);
-            urlInfo[kv[0]] = kv[1];
-
-        }
-        if (!urlInfo.pn) {
-            urlInfo.pn = 1;
-
-            if (isNoChooesd) {
-                urlInfo['url'] = ur + "?pn=1";
-            } else {
-                urlInfo['url'] = ur + "&pn=1";
-            }
-        } else {
-            urlInfo['url'] = ur;
-        }
-
-
-        return urlInfo;
-    }
-
-    function chooseUrl() {
-        $(this).addClass("bg-primary");
-
-        let name = $(this).text().trim();
-        console.log(name);
-        let chooseName = $(this).parent().attr("id");
-
-        if (name === "不限") {
-
-            window.location.href = curUrl.replace(new RegExp("&?" + chooseName + "=" + urlInfo[chooseName]), "");
-
-        } else if (curUrl.indexOf(chooseName) === -1) {
-            if (isNoChooesd) {
-                window.location.href = curUrl + "?" + chooseName + "=" + name;
-            } else {
-                window.location.href = curUrl + "&" + chooseName + "=" + name;
-            }
-        } else {
-
-            window.location.href = curUrl.replace(chooseName + "=" + urlInfo[chooseName], chooseName + "=" + name);
-
-        }
-
-    }
 
     $(
         function () {
