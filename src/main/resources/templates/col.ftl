@@ -1,10 +1,10 @@
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>H视频</title>
+    <title>${videoCol.title}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
@@ -12,8 +12,6 @@
 <body>
 
 <div class="container">
-
-
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
         <a class="display-1 navbar-brand" href="/cols">HUIDO </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -24,38 +22,37 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul id="videoType" class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-success font-weight-bold" href="/cols">首页<span
+                    <a class="nav-link font-weight-bold" href="#">首页<span
                                 class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item text-weight-bold">
-                    <a class="nav-link " href="/cols?videoType=福利">福利</a>
+                    <a class="nav-link font-weight-bold " href="/cols?videoType=福利">福利</a>
                 </li>
 
                 <li class="nav-item text-weight-bold">
-                    <a class="nav-link " href="/cols?videoType=电影">电影</a>
+                    <a class="nav-link font-weight-bold" href="/cols?videoType=电影">电影</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="/cols?videoType=电视剧">电视剧</a>
+                    <a class="nav-link font-weight-bold " href="/cols?videoType=电视剧">电视剧</a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link " href="/cols?videoType=动漫&pn=1">动漫</a>
+                    <a class="nav-link font-weight-bold " href="/cols?videoType=动漫&pn=1">动漫</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="/cols?videoType=综艺&pn=1">综艺</a>
+                    <a class="nav-link font-weight-bold" href="/cols?videoType=综艺&pn=1">综艺</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
+            <form action="/cols?" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" name="title" placeholder="Search" aria-label="Search">
+                <button id="search" type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
             </form>
-            <button id="search" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+
         </div>
     </nav>
-
 
     <div class="row" style="height: 50px">
 
@@ -95,9 +92,10 @@
                 <#if video.videoId == vd.videoId >
                     <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
                                                            class="badge badge-primary p-2">${vd.orderName}</a></li>
+                <#else>
+                    <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
+                                                           class="badge badge-light p-2 ml-2 ">${vd.orderName}</a></li>
                 </#if>
-                <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
-                                                       class="badge badge-light p-2 ml-2 ">${vd.orderName}</a></li>
             </#list>
         </ul>
 
@@ -136,28 +134,5 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-<script>
-    $(function () {
-        $("#skip-page").click(
-            search()
-        );
-
-
-        $(document).keypress(
-            function (event) {
-
-                keycode = (event.keyCode ? event.keyCode : event.which);
-                if (keycode === 13) {
-                    search();
-                }
-
-
-            }
-        )
-
-
-    })
-
-</script>
 
 </html>

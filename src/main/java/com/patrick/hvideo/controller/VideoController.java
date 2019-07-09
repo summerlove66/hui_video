@@ -67,7 +67,6 @@ public class VideoController {
         List<VideoColumn> videoColumnList;
 
         Page<?> page = PageHelper.startPage(pageNum,pageSize);
-        System.out.println("ALL :" +page.getTotal());
         videoColumnList = videoColumnMapper.findVideoColByRange(videoColumn);
         model.addAttribute("videoColumnList" ,videoColumnList);
 //        model.addAttribute("pn" ,page.getPageNum());

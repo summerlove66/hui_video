@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ALBUM</title>
+    <title>HUIDO</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
@@ -15,8 +14,6 @@
 <body>
 
 <div class="container">
-
-
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
         <a class="display-1 navbar-brand" href="/cols">HUIDO </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -27,35 +24,35 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul id="videoType" class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-success font-weight-bold" href="#">首页<span
+                    <a class="nav-link font-weight-bold" href="#">首页<span
                                 class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item text-weight-bold">
-                    <a class="nav-link " href="/cols?videoType=福利">福利</a>
+                    <a class="nav-link font-weight-bold " href="/cols?videoType=福利">福利</a>
                 </li>
 
                 <li class="nav-item text-weight-bold">
-                    <a class="nav-link " href="/cols?videoType=电影">电影</a>
+                    <a class="nav-link font-weight-bold" href="/cols?videoType=电影">电影</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="/cols?videoType=电视剧">电视剧</a>
+                    <a class="nav-link font-weight-bold " href="/cols?videoType=电视剧">电视剧</a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link " href="/cols?videoType=动漫&pn=1">动漫</a>
+                    <a class="nav-link font-weight-bold " href="/cols?videoType=动漫&pn=1">动漫</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="/cols?videoType=综艺&pn=1">综艺</a>
+                    <a class="nav-link font-weight-bold" href="/cols?videoType=综艺&pn=1">综艺</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
+            <form action="/cols?" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" name="title" placeholder="Search" aria-label="Search">
+                <button id="search" type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
             </form>
-            <button id="search" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+
         </div>
     </nav>
 
@@ -64,16 +61,7 @@
 
 
     </div>
-    <#--    <div class="row">-->
 
-    <#--            <span style="font-size: 1rem; color: red">-->
-    <#--                <i class="fas fa-heartbeat"><a class="ml-2" href="#">福利</a></i>-->
-
-    <#--            </span>-->
-    <#--        <i>今日更新10</i>-->
-
-
-    <#--    </div>-->
     <div id="choose" class="row">
 
         <ul id="contType" class="list-inline">
@@ -87,8 +75,6 @@
             <li class="list-inline-item p-2">纪录</li>
             <li class="list-inline-item p-2">伦理</li>
             <li class="list-inline-item p-2">战争</li>
-
-
         </ul>
         <ul id="area" class="list-inline">
             <li class="list-inline-item p-2"><span class="text-muted ">地区</span></li>
@@ -100,9 +86,9 @@
             <li class="list-inline-item p-2">日本</li>
             <li class="list-inline-item p-2">美国</li>
             <li class="list-inline-item p-2">英国</li>
-            <li class="list-inline-item p-2">俄罗斯</li>
             <li class="list-inline-item p-2">法国</li>
-            <li class="list-inline-item p-2">其他</li>
+            <li class="list-inline-item p-2">西班牙</li>
+            <li class="list-inline-item p-2">加拿大</li>
 
         </ul>
 
@@ -205,35 +191,27 @@
 
     pageSetup();
 
+    function fx() {
+
+
+        alert("hello world");
+    }
+
+
     $(
         function () {
-
-
             // if( $("#area li")
             $("#navbarSupportedContent ul li").click(chooseUrl);
 
             $("#choose ul li").click(
                 chooseUrl
             );
-            //search
-            $("#search").click
-            (function () {
-                    let key = $("form input").val();
-                    if (key.length > 0) {
-                        window.location.href = "/cols?title=" + key
-                    } else {
-                        window.location.href = "/cols?pn=1";
-                    }
-                }
-            );
-
-            //skip
+            skip
             $("#skip-page").click(
                 function () {
                     window.location.href = urlInfo.url.replace("pn=" + pn, "pn=" + $("#page li input").last().val());
                 }
             )
-
 
         }
     )
