@@ -68,10 +68,10 @@ public class VideoController {
         List<VideoColumn> videoColumnList;
 
         Page<?> page = PageHelper.startPage(pageNum,pageSize);
-        System.out.println(page.getTotal());
+        System.out.println("ALL :" +page.getTotal());
         videoColumnList = videoColumnMapper.findVideoColByRange(videoColumn);
         model.addAttribute("videoColumnList" ,videoColumnList);
-        model.addAttribute("page" ,page.getPageNum());
+//        model.addAttribute("pn" ,page.getPageNum());
 
         return "album";
 

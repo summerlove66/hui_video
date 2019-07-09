@@ -120,8 +120,10 @@
                 </a>
 
                 <div class="card-body">
-                    <h5 class="card-title"><a href="#"></a></h5>
-                    <p class="card-text">${videoCol.info}</p>
+                    <h5 class="card-title"><a href="#">${videoCol.title}</a></h5>
+                    <span class="text-muted text-left d-inline-block text-truncate"
+                          style="max-width: 150px; font-size:0.8em">${videoCol.info}</span>
+
                 </div>
             </div>
 
@@ -139,31 +141,26 @@
             <li class="list-inline-item ">
                 <button class="btn btn-outline-secondary">首页</button>
             </li>
+            <li class="list-inline-item ">
+                <button class="btn btn-outline-secondary"><a>上一页</a></button>
+            </li>
+            <li class="list-inline-item">
+                <button class="btn btn-outline-secondary"><a></a></button>
+            </li>
 
-
-            <li class="list-inline-item px-2 border">
-                <button class="btn btn-outline-secondary"></button>
-            </li>
-            <li class="list-inline-item px-2 border">
-                <button class="btn btn-outline-secondary"></button>
-            </li>
-            <li class="list-inline-item px-2 border">
-                <button class="btn btn-outline-secondary"></button>
-            </li>
-            <li class="list-inline-item px-2 border">
-                <button class="btn btn-outline-secondary">下一页</button>
+            <li class="list-inline-item">
+                <button class="btn btn-outline-secondary"><a>下一页</a></button>
             </li>
             <li class="list-inline-item">
                 <div class="input-group mb-3" style="width: 8rem">
                     <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">跳转</button>
+                        <button id="skip-page" class="btn btn-outline-secondary" type="button">跳转</button>
                     </div>
                 </div>
 
 
             </li>
-            <li class="list-inline-item px-2 border">6</li>
 
 
         </ul>
@@ -188,9 +185,29 @@
         crossorigin="anonymous"></script>
 <script>
     let curUrl = decodeURIComponent(window.location.href);
+    let isNoChooesd = curUrl.indexOf("?") === -1;
     let urlInfo = parseUrl(curUrl);
+    let pn = parseInt(urlInfo.pn);
 
-    function goTopage() {
+    pageSetup();
+
+    function pageSetup() {
+        let preLink, nextLink, firstLink;
+        firstLink = urlInfo.url.replace("pn=" + pn, "pn=1");
+        nextLink = urlInfo.url.replace("pn=" + pn, "pn=" + (pn + 1));
+
+        if (pn > 1) {
+            preLink = urlInfo.url.replace("pn=" + pn, "pn=" + (pn - 1));
+
+            $("#page li:eq(1) button a").attr("href", preLink);
+        }
+
+        if(urlInfo.title){
+            $("form input") .val(urlInfo.title);
+        }
+        $("#page li:eq(0) button a").attr("href", firstLink);
+        $("#page li:eq(2) button a").html(pn);
+        $("#page li:eq(3) button a").attr("href", nextLink);
 
 
     }
@@ -208,7 +225,16 @@
         }
         if (!urlInfo.pn) {
             urlInfo.pn = 1;
+
+            if (isNoChooesd ) {
+                urlInfo['url'] = ur + "&pn=1";
+            } else {
+                urlInfo['url'] = ur;
+            }
+        } else {
+            urlInfo['url'] = ur;
         }
+
 
         return urlInfo;
     }
@@ -229,12 +255,18 @@
                     let chooseName = $(this).parent().attr("id");
 
                     if (name === "不限") {
-                        window.location.href = curUrl.replace(urlInfo[chooseName], "");
+
+                            window.location.href = curUrl.replace( new RegExp("&?" + chooseName + "=" + urlInfo[chooseName]), "");
+
                     } else if (curUrl.indexOf(chooseName) === -1) {
-                        window.location.href = curUrl + chooseName + "=" + name;
+                        if (isNoChooesd) {
+                            window.location.href = curUrl + "?" + chooseName + "=" + name;
+                        } else {
+                            window.location.href = curUrl + "&" + chooseName + "=" + name;
+                        }
                     } else {
 
-                        window.location.href = curUrl.replace(urlInfo[chooseName], "area=" + name);
+                        window.location.href = curUrl.replace(chooseName + "=" + urlInfo[chooseName], chooseName+"=" + name);
 
                     }
 
@@ -243,35 +275,23 @@
             //search
             $("#search").click
             (function () {
-
-                    if ($("form input").val().length > 0) {
-                        window.location.href = "/?key=" + $("form input").val();
-                    }
+                    let key = $("form input").val();
+                    if (key.length > 0) {
+                        window.location.href = "/cols?title=" + key
+                    }else{
+                        window.location.href = "/cols?page=1";
+                }
                 }
             );
 
-            //page
-            let pn = parseInt(urlInfo.page);
-
-            if (pn < 2) {
-                for (let i = 0; i < 3; i++) {
-                    if (i === pn) {
-                        $(`#page li:eq(i)`).addClass("bg-primary")
-                    }
-                    $("#page li button").html("<a href='" + curUrl.replace("pn=" + pn, "pn=" + i) + " '>"
-                        + i + 1 + " </a>")
+            //skip
+            $("#skip-page").click(
+                function () {
+                    window.location.href = urlInfo.url.replace("pn=" + pn, "pn=" + $("#page li input").last().val());
                 }
+            )
 
-            } else {
-                for (let i = 0; i < 3; i++) {
-                    if (i === 1) {
-                        $(`#page li:eq(i-1)`).addClass("bg-primary")
-                    }
-                    $("#page li button").html("<a href='" + curUrl.replace("pn=" + pn, "pn=" + pn + i - 1) + " '>"
-                        + pn + " </a>");
-                }
 
-            }
         }
     )
 </script>

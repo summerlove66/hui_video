@@ -5,7 +5,7 @@ import com.patrick.hvideo.model.VideoColumn;
 public class VideoColSqlProvider {
 
     public String selector(VideoColumn videoColumn) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM vc WHERE 1=1");
+        StringBuilder sql = new StringBuilder("SELECT * FROM video_column WHERE 1=1");
         if (videoColumn ==null){
             return sql.toString();
         }
