@@ -16,7 +16,7 @@ public interface VideoColumnMapper {
             @Result(property = "contType", column = "cont_type"),
             @Result(property = "dataId", column = "data_id")
     })
-    @Select("SELECT * FROM vc WHERE id =#{id} ")
+    @Select("SELECT * FROM video_column WHERE id =#{id} ")
     VideoColumn findVideoColumnById(@Param("id") int id);
 
     @ResultMap(value = "videoColMap")

@@ -14,44 +14,45 @@
 <div class="container">
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="display-1 navbar-brand" href="#">H-VIDEO</a>
+    <nav class="navbar navbar-expand-lg  navbar-light bg-light">
+        <a class="display-1 navbar-brand" href="#">HUIDO </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul id="videoType" class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link text-success font-weight-bold" href="#">首页<span
-                            class="sr-only">(current)</span></a>
+                                class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">福利</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link " href="#">电视剧</a>
+                <li class="nav-item text-weight-bold">
+                    <a class="nav-link " href="/cols?videoType=福利">福利</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link " href="#">电影</a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link " href="#">动漫</a>
+                <li class="nav-item text-weight-bold">
+                    <a class="nav-link " href="/cols?videoType=电影">电影</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="#">综艺</a>
+                    <a class="nav-link " href="/cols?videoType=电视剧">电视剧</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/cols?videoType=动漫&pn=1">动漫</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/cols?videoType=综艺&pn=1">综艺</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
             </form>
+            <button id="search" class="btn btn-outline-success my-2 my-sm-0">Search</button>
         </div>
     </nav>
 
@@ -61,77 +62,47 @@
 
     </div>
 
-
     <div class="row">
-
-            <span style="font-size: 1rem; color: red">
-                <i class="fas fa-history"><a class="ml-2" href="#">历史</a></i>
-
-            </span>
-        <br>
-        <hr>
-
-
-    </div>
-
-
-    <div  id="history" class="row">
-        <div class="col-xl-2 col-md-3 col-sm-4 card ">
-            <a href="#" style="position: relative">
-                <img class="card-img-top" src="${videoCol.pic}" alt=""/>
-                <span class="text-right text-muted" style="position:absolute;bottom: 0px">HD</span>
-            </a>
-
-            <div class="card-body">
-                <h5 class="card-title"><a href="#">${videoCol.title}</a></h5>
-                <span class="text-muted text-left d-inline-block text-truncate"
-                      style="max-width: 150px; font-size:0.8em">${videoCol.info}</span>
-            </div>
+        <div class="col-md-4">
+            <img src="${videoCol.pic}" alt="${videoCol.title}">
         </div>
+    </div>
+    <br>
+    <div class="col-md-8">
+        <h3>${videoCol.title}</h3>
+        <ul>
+            <li><span class="text-muted">主演:</span></li>
+            <li><span class="text-muted">导演:</span></li>
+            <li><span class="text-muted">类型:</span> ${videoCol.contType} <span
+                        class="text-muted">地区: </span>${videoCol.area}<span
+                        class="text-muted">年份:</span> ${videoCol.year}</li>
+            <li><span class="text-muted">简介:</span>
+                <p>
+
+                    ${videoCol.info}
+                </p></li>
+            <li>
+                <a class="p-2 bg-info rounded" href="/video/${video.videoId ?c}">播放</a>
+            </li>
+        </ul>
 
     </div>
-
+    <br>
     <div class="row">
-
-            <span style="font-size: 1rem; color: red">
-                <i class="fas fa-heartbeat"><a class="ml-2" href="#">福利</a></i>
-
-            </span>
-        <br>
-        <hr>
-
-
-    </div>
-
-
-    <div   id="heihei"  class="row">
-        <div class="col-xl-2 col-md-3 col-sm-4 card ">
-            <a href="#" style="position: relative">
-                <img class="card-img-top" src="${videoCol.pic}" alt=""/>
-                <span class="text-right text-muted" style="position:absolute;bottom: 0px">HD</span>
-            </a>
-
-            <div class="card-body">
-                <h5 class="card-title"><a href="#">${videoCol.title}</a></h5>
-                <span class="text-muted text-left d-inline-block text-truncate"
-                      style="max-width: 150px; font-size:0.8em">${videoCol.info}</span>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-            <span style="font-size: 1rem; color: red">
-                <i class="fab fa-hotjar"><a class="ml-2" href="#">最新</a></i>
-
-            </span>
-        <br>
-        <hr>
+        <h4>播放列表</h4>
+        <ul class="list-inline">
+            <#list videoList as vd>
+                <#if video.videoId == vd.videoId >
+                    <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
+                                                           class="badge badge-primary p-2">${vd.orderName}</a></li>
+                </#if>
+                <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
+                                                       class="badge badge-light p-2 ml-2 ">${vd.orderName}</a></li>
+            </#list>
+        </ul>
 
 
     </div>
-
 
     <div class="row">
 
@@ -151,6 +122,17 @@
 
 
 </div>
+<script>
+    $(function () {
+        $("#skip-page").click(
+            function () {
+                window.location.href = urlInfo.url.replace("pn=" + pn, "pn=" + $("#page li input").last().val());
+            }
+        )
+
+    })
+
+</script>
 
 
 </body>

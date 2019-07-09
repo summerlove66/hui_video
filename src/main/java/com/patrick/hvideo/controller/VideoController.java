@@ -41,23 +41,22 @@ public class VideoController {
         return "play";
     }
 
-    @ResponseBody
+
+
     @GetMapping("/col/{videoColId}")
-    public VideoColumn getVideoColumnByID(@PathVariable("videoColId") int videoColId) {
-        return videoColumnMapper.findVideoColumnById(videoColId);
-    }
 
-    @GetMapping("/videos/col/{videoColId}/")
-    public VideoGroup getVideosByCol(@PathVariable("videoColId") int videoColId) {
-
+    public String getVideoColByID(@PathVariable int videoColId , Model model) {
         VideoColumn videoColumn = videoColumnMapper.findVideoColumnById(videoColId);
 
-
-        List<Video> videoList = videoMapper.findBySourceAndDataId(videoColumn.getSource(), videoColumn.getDataId());
-
-        System.out.println(videoList);
-        return new VideoGroup(videoColumn, videoList);
+        System.out.println("VideoCOL" +videoColumn);
+        List<Video> videoList = videoMapper.findBySourceAndDataId(videoColumn.getSource(),videoColumn.getDataId());
+        model.addAttribute("video",videoList.get(0));
+        model.addAttribute("videoList" ,videoList);
+        model.addAttribute("videoCol" ,videoColumn);
+        return "col";
     }
+
+
 
     @GetMapping("cols")
 

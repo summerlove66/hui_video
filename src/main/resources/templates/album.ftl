@@ -18,37 +18,37 @@
 
 
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
-        <a class="display-1 navbar-brand" href="#">H-VIDEO</a>
+        <a class="display-1 navbar-brand" href="#">HUIDO </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul id="videoType" class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link text-success font-weight-bold" href="#">首页<span
                                 class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">福利</a>
+                <li class="nav-item text-weight-bold">
+                    <a class="nav-link " href="/cols?videoType=福利">福利</a>
+                </li>
+
+                <li class="nav-item text-weight-bold">
+                    <a class="nav-link " href="/cols?videoType=电影">电影</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="#">电视剧</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link " href="#">电影</a>
+                    <a class="nav-link " href="/cols?videoType=电视剧">电视剧</a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link " href="#">动漫</a>
+                    <a class="nav-link " href="/cols?videoType=动漫&pn=1">动漫</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="#">综艺</a>
+                    <a class="nav-link " href="/cols?videoType=综艺&pn=1">综艺</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -64,16 +64,16 @@
 
 
     </div>
-    <div class="row">
+    <#--    <div class="row">-->
 
-            <span style="font-size: 1rem; color: red">
-                <i class="fas fa-heartbeat"><a class="ml-2" href="#">福利</a></i>
+    <#--            <span style="font-size: 1rem; color: red">-->
+    <#--                <i class="fas fa-heartbeat"><a class="ml-2" href="#">福利</a></i>-->
 
-            </span>
-        <i>今日更新10</i>
+    <#--            </span>-->
+    <#--        <i>今日更新10</i>-->
 
 
-    </div>
+    <#--    </div>-->
     <div id="choose" class="row">
 
         <ul id="contType" class="list-inline">
@@ -113,14 +113,14 @@
     <div class="row">
 
         <#list videoColumnList as videoCol >
-            <div class="col-xl-2 col-md-3 col-sm-4 card ">
-                <a href="#" style="position: relative">
+            <div class="col-xl-2 col-md-3 col-sm-4 ">
+                <a href="/col/${videoCol.id?c}" style="position: relative">
                     <img class="card-img-top" src="${videoCol.pic}" alt=""/>
-                    <span class="text-right text-muted" style="position:absolute;bottom: 0px">HD</span>
+                    <#--                    <span class="text-right text-muted" style="position:absolute;bottom: 0px">HD</span>-->
                 </a>
 
                 <div class="card-body">
-                    <h5 class="card-title"><a href="#">${videoCol.title}</a></h5>
+                    <h5 class="card-title"><a href="/col/${videoCol.id?c}">${videoCol.title}</a></h5>
                     <span class="text-muted text-left d-inline-block text-truncate"
                           style="max-width: 150px; font-size:0.8em">${videoCol.info}</span>
 
@@ -132,41 +132,54 @@
 
     </div>
 
-</div>
+    <div class="row pt-5">
 
-<div class="row pt-5">
+        <div class="col-md-4 offset-4">
+            <ul id="page" class="list-inline">
+                <li class="list-inline-item ">
+                    <button class="btn btn-outline-secondary"><a>首页</a></button>
+                </li>
+                <li class="list-inline-item ">
+                    <button class="btn btn-outline-secondary"><a>上一页</a></button>
+                </li>
+                <li class="list-inline-item">
+                    <button class="btn btn-outline-secondary"><a></a></button>
+                </li>
 
-    <div class="col-md-4 offset-4">
-        <ul id="page" class="list-inline">
-            <li class="list-inline-item ">
-                <button class="btn btn-outline-secondary">首页</button>
-            </li>
-            <li class="list-inline-item ">
-                <button class="btn btn-outline-secondary"><a>上一页</a></button>
-            </li>
-            <li class="list-inline-item">
-                <button class="btn btn-outline-secondary"><a></a></button>
-            </li>
-
-            <li class="list-inline-item">
-                <button class="btn btn-outline-secondary"><a>下一页</a></button>
-            </li>
-            <li class="list-inline-item">
-                <div class="input-group mb-3" style="width: 8rem">
-                    <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                    <div class="input-group-append">
-                        <button id="skip-page" class="btn btn-outline-secondary" type="button">跳转</button>
+                <li class="list-inline-item">
+                    <button class="btn btn-outline-secondary"><a>下一页</a></button>
+                </li>
+                <li class="list-inline-item">
+                    <div class="input-group" style="width: 6rem">
+                        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="input-group-append">
+                            <button id="skip-page" class="btn btn-outline-secondary" type="button">跳转</button>
+                        </div>
                     </div>
-                </div>
 
 
-            </li>
+                </li>
 
 
-        </ul>
+            </ul>
+
+        </div>
+
 
     </div>
+    <div class="row">
 
+
+        <hr>
+        <p class="text-secondary">
+            免责声明:HUIDO电影网 所有视频均来自互联网收集而来，版权归原创者所有，如侵犯了你的权益，请通知我 coderslash@gmail,com，我们会及时删除侵权内容，谢谢合作。
+        </p>
+        <p class="text-secondary ">
+            Copyright © 2012-2018 www.huido.com/cols. All Rights Reserved.
+        </p>
+
+
+    </div>
 
 </div>
 
@@ -200,10 +213,11 @@
             preLink = urlInfo.url.replace("pn=" + pn, "pn=" + (pn - 1));
 
             $("#page li:eq(1) button a").attr("href", preLink);
+
         }
 
-        if(urlInfo.title){
-            $("form input") .val(urlInfo.title);
+        if (urlInfo.title) {
+            $("form input").val(urlInfo.title);
         }
         $("#page li:eq(0) button a").attr("href", firstLink);
         $("#page li:eq(2) button a").html(pn);
@@ -226,10 +240,10 @@
         if (!urlInfo.pn) {
             urlInfo.pn = 1;
 
-            if (isNoChooesd ) {
-                urlInfo['url'] = ur + "&pn=1";
+            if (isNoChooesd) {
+                urlInfo['url'] = ur + "?pn=1";
             } else {
-                urlInfo['url'] = ur;
+                urlInfo['url'] = ur + "&pn=1";
             }
         } else {
             urlInfo['url'] = ur;
@@ -239,38 +253,40 @@
         return urlInfo;
     }
 
+    function chooseUrl() {
+        $(this).addClass("bg-primary");
+
+        let name = $(this).text().trim();
+        console.log(name);
+        let chooseName = $(this).parent().attr("id");
+
+        if (name === "不限") {
+
+            window.location.href = curUrl.replace(new RegExp("&?" + chooseName + "=" + urlInfo[chooseName]), "");
+
+        } else if (curUrl.indexOf(chooseName) === -1) {
+            if (isNoChooesd) {
+                window.location.href = curUrl + "?" + chooseName + "=" + name;
+            } else {
+                window.location.href = curUrl + "&" + chooseName + "=" + name;
+            }
+        } else {
+
+            window.location.href = curUrl.replace(chooseName + "=" + urlInfo[chooseName], chooseName + "=" + name);
+
+        }
+
+    }
 
     $(
         function () {
 
 
             // if( $("#area li")
+            $("#navbarSupportedContent ul li").click(chooseUrl);
 
-
-            $("#choose ul li").click(function () {
-                    $(this).addClass("bg-primary");
-
-                    let name = $(this).text().trim();
-                    console.log(name);
-                    let chooseName = $(this).parent().attr("id");
-
-                    if (name === "不限") {
-
-                            window.location.href = curUrl.replace( new RegExp("&?" + chooseName + "=" + urlInfo[chooseName]), "");
-
-                    } else if (curUrl.indexOf(chooseName) === -1) {
-                        if (isNoChooesd) {
-                            window.location.href = curUrl + "?" + chooseName + "=" + name;
-                        } else {
-                            window.location.href = curUrl + "&" + chooseName + "=" + name;
-                        }
-                    } else {
-
-                        window.location.href = curUrl.replace(chooseName + "=" + urlInfo[chooseName], chooseName+"=" + name);
-
-                    }
-
-                }
+            $("#choose ul li").click(
+                chooseUrl
             );
             //search
             $("#search").click
@@ -278,9 +294,9 @@
                     let key = $("form input").val();
                     if (key.length > 0) {
                         window.location.href = "/cols?title=" + key
-                    }else{
-                        window.location.href = "/cols?page=1";
-                }
+                    } else {
+                        window.location.href = "/cols?pn=1";
+                    }
                 }
             );
 
