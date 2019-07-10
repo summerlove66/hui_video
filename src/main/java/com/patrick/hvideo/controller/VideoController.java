@@ -6,7 +6,6 @@ import com.patrick.hvideo.mapper.VideoColumnMapper;
 import com.patrick.hvideo.mapper.VideoMapper;
 import com.patrick.hvideo.model.Video;
 import com.patrick.hvideo.model.VideoColumn;
-import com.patrick.hvideo.model.VideoGroup;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
