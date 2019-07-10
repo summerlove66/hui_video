@@ -102,4 +102,21 @@ public class VideoColumn implements Serializable {
     public void setYear(int year) {
         this.year = year;
     }
+
+    @Override
+    public String toString() {
+        return "VideoColumn{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", pic='" + pic + '\'' +
+                ", cast='" + cast + '\'' +
+                ", info='" + info + '\'' +
+                ", videoType='" + videoType + '\'' +
+                ", contType='" + contType + '\'' +
+                ", area='" + area + '\'' +
+                ", source='" + source + '\'' +
+                ", dataId='" + dataId + '\'' +
+                ", year=" + year +
+                '}';
+    }
 }

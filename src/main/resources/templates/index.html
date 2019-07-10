@@ -1,0 +1,167 @@
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>H视频</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="display-1 navbar-brand" href="#">H-VIDEO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link text-success font-weight-bold" href="#">首页<span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">福利</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="#">电视剧</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="#">电影</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link " href="#">动漫</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="#">综艺</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+
+    <div class="row" style="height: 50px">
+
+
+    </div>
+
+
+    <div class="row">
+
+            <span style="font-size: 1rem; color: red">
+                <i class="fas fa-history"><a class="ml-2" href="#">历史</a></i>
+
+            </span>
+        <br>
+        <hr>
+
+
+    </div>
+
+
+    <div id="history" class="row">
+        <div class="col-xl-2 col-md-3 col-sm-4 card ">
+            <a href="#" style="position: relative">
+                <img class="card-img-top" src="${videoCol.pic}" alt=""/>
+                <span class="text-right text-muted" style="position:absolute;bottom: 0px">HD</span>
+            </a>
+
+            <div class="card-body">
+                <h5 class="card-title"><a href="#">${videoCol.title}</a></h5>
+                <span class="text-muted text-left d-inline-block text-truncate"
+                      style="max-width: 150px; font-size:0.8em">${videoCol.info}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+            <span style="font-size: 1rem; color: red">
+                <i class="fas fa-heartbeat"><a class="ml-2" href="#">福利</a></i>
+
+            </span>
+        <br>
+        <hr>
+
+
+    </div>
+
+
+    <div id="heihei" class="row">
+        <div class="col-xl-2 col-md-3 col-sm-4 card ">
+            <a href="#" style="position: relative">
+                <img class="card-img-top" src="${videoCol.pic}" alt=""/>
+                <span class="text-right text-muted" style="position:absolute;bottom: 0px">HD</span>
+            </a>
+
+            <div class="card-body">
+                <h5 class="card-title"><a href="#">${videoCol.title}</a></h5>
+                <span class="text-muted text-left d-inline-block text-truncate"
+                      style="max-width: 150px; font-size:0.8em">${videoCol.info}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+            <span style="font-size: 1rem; color: red">
+                <i class="fab fa-hotjar"><a class="ml-2" href="#">最新</a></i>
+
+            </span>
+        <br>
+        <hr>
+
+
+    </div>
+
+
+    <div class="row">
+
+
+        <hr>
+        <p class="text-secondary">
+            免责声明:(HELE)合乐-最新电影更新网所有视频均来自互联网收集而来，版权归原创者所有，如果侵犯了你的权益，请通知我(HELE)合乐-最新电影更新网2193489531@maccms.com，我们会及时删除侵权内容，谢谢合作。
+
+
+        </p>
+        <p class="text-secondary ">
+            Copyright © 2012-2018 www.helezaixian88.cn. All Rights Reserved.
+        </p>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+<script src="/statics/h_media/js/index.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</html>
