@@ -74,8 +74,8 @@
         <h4>播放列表</h4>
         <ul id="playlist" class="list-inline">
             <#list videoList as vd>
-                    <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
-                                                           class="badge badge-light p-2 ">${vd.orderName !"未知"}</a></li>
+                <li class="list-inline-item border"><a href="/video/${videoCol.id}/${vd.videoId?c}"
+                                                       class="badge badge-light p-2 ">${vd.orderName !"未知"}</a></li>
             </#list>
         </ul>
 
@@ -107,7 +107,7 @@
     $(function () {
             let vid = window.location.pathname.split("/")[3];
             $.post("/video/" + vid,
-                {"code":  getPlayCode(vid)})
+                {"code": getPlayCode(vid)})
                 .done(function (video) {
 
                     $("#info span").first().text(video.orderName);

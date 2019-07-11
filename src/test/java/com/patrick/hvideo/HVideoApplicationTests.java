@@ -24,13 +24,6 @@ public class HVideoApplicationTests {
 
     @Test
     public void contextLoads() throws NoSuchAlgorithmException, UnsupportedEncodingException {
-
-//
-         ArrayList<String> arr = new ArrayList<>();
-         for (Byte i : Base64.getUrlDecoder().decode("123")){
-            arr .add((char)(i & 0xFF) +"");
-         }
-        System.out.println(String.join("",arr));
     }
 
 }
