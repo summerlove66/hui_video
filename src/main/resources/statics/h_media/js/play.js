@@ -555,3 +555,6 @@ function getbres(str) {
     return bArr(str).toLocaleString().split(",").map(e => String.fromCharCode(parseInt(e))).join("")
 }
 
+function getPlayCode(vid) {
+   return  getbres(myenc(vid + Date.parse(new Date()).toString().substring(0, 8)));
+}

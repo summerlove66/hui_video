@@ -107,7 +107,7 @@
     $(function () {
             let vid = window.location.pathname.split("/")[3];
             $.post("/video/" + vid,
-                {"code":  getbres(myenc(vid + Date.parse(new Date()).toString().substring(0, 8)))})
+                {"code":  getPlayCode(vid)})
                 .done(function (video) {
 
                     $("#info span").first().text(video.orderName);
