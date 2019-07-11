@@ -6,13 +6,17 @@ import com.patrick.hvideo.mapper.VideoColumnMapper;
 import com.patrick.hvideo.mapper.VideoMapper;
 import com.patrick.hvideo.model.Video;
 import com.patrick.hvideo.model.VideoColumn;
+import com.patrick.hvideo.utils.EncryptUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,15 +29,25 @@ public class VideoController {
     @Value("${page.size}")
     private int pageSize;
 
-    @GetMapping("/video/{videoId}")
+    @PostMapping("/video/{videoId}")
+    @ResponseBody
+    private Video getVideoById(@PathVariable("videoId") int videoId, @RequestParam("code") String code) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        String myCode = EncryptUtils.getCode(videoId+"");
+        System.out.println(code +"+++"+myCode);
+        if (!myCode.equals(code)) {
+            return null;
+        }
 
-    public String getVideoByID(@PathVariable int videoId, Model model) {
-        Video video = videoMapper.findById(videoId);
-        video.setLink(Base64.getUrlEncoder().encodeToString(video.getLink().getBytes()));
-        VideoColumn videoColumn = videoColumnMapper.findVideoColBYSourceAndDataId(video.getSource(), video.getDataId());
+        return videoMapper.findById(videoId);
 
-        List<Video> videoList = videoMapper.findBySourceAndDataId(video.getSource(), video.getDataId());
-        model.addAttribute("video", video);
+    }
+
+
+    @GetMapping("/video/{colId}/{numericId:[\\d]+}")
+
+    public String getVideoByID(@PathVariable("colId") int colId, Model model ) {
+        VideoColumn videoColumn = videoColumnMapper.findVideoColumnById(colId);
+        List<Video> videoList = videoMapper.findBySourceAndDataId(videoColumn.getSource(), videoColumn.getDataId());
         model.addAttribute("videoList", videoList);
         model.addAttribute("videoCol", videoColumn);
         return "play";
@@ -62,11 +76,9 @@ public class VideoController {
         System.out.println("VIDEOCOLUMN " + videoColumn);
         List<VideoColumn> videoColumnList;
 
-        Page<?> page = PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         videoColumnList = videoColumnMapper.findVideoColByRange(videoColumn);
         model.addAttribute("videoColumnList", videoColumnList);
-//        model.addAttribute("pn" ,page.getPageNum());
-
         return "album";
 
     }

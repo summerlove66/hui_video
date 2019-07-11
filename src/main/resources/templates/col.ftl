@@ -78,7 +78,7 @@
                     ${videoCol.info !"未知"}
                 </p></li>
             <li>
-                <a class="p-2 bg-info rounded" href="/video/${video.videoId ?c}">播放</a>
+                <a class="p-2 bg-primary text-light font-weight-bold rounded" href="/video/${videoCol.id ?c}/${videoList[0].videoId ?c}">播放</a>
             </li>
         </ul>
 
@@ -88,13 +88,8 @@
         <h4>播放列表</h4>
         <ul class="list-inline">
             <#list videoList as vd>
-                <#if video.videoId == vd.videoId >
-                    <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
-                                                           class="badge badge-primary p-2">${vd.orderName}</a></li>
-                <#else>
-                    <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
+                    <li class="list-inline-item border"><a href="/video/${videoCol.id?c}/${vd.videoId?c}"
                                                            class="badge badge-light p-2 ml-2 ">${vd.orderName}</a></li>
-                </#if>
             </#list>
         </ul>
 
@@ -121,10 +116,10 @@
 
 </body>
 
-<script src="/statics/js/jquery-3.2.1.slim.min.js"></script>
+<script src="/statics/js/jquery-3.4.1.min.js"></script>
 <script src="/statics/js/boostrap-4.0.0.min.js"></script>
 <script src="/statics/js/popper-1.12.9.min.js"></script>
-<script src="/statics/h_media/js/index.js"></script>
+<script src="/statics/h_media/js/play.js"></script>
 
 
 </html>

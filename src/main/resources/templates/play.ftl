@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>${video.title !"未知" }</title>
+    <title>${videoCol.title !"未知" }</title>
     <link rel="stylesheet" href="/statics/css/bootstrap-4.0.0.min.css">
     <link rel="stylesheet" href="/statics/css/font-awesome-5.9.0.min.css">
     <link href="https://vjs.zencdn.net/7.5.4/video-js.css" rel="stylesheet">
@@ -11,7 +11,7 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
-        <a class="display-1 navbar-brand" href="/cols">HUIDO </a>
+        <a class="display-1 navbar-brand" href="/cols">HUIDO</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -57,16 +57,11 @@
 
     </div>
     <div id="video" class="row">
-        <video-js id=example-video width=960 height=540 class="vjs-default-skin" controls>
-            <source
-                    src="${video.link}"
-                    type="application/x-mpegURL">
-        </video-js>
 
     </div>
-    <div>
-        <h4>${video.title}</h4>
-        <span class="text-muted">${video.orderName !"未知"}</span> &nbsp;<span
+    <div id="info">
+        <h4>${videoCol.title !"未知"}</h4>
+        <span class="text-muted">未知</span> &nbsp;<span
                 class="text-muted">类型：${videoCol.contType !"未知" }</span>&nbsp;<span
                 class="text-muted">地区: ${videoCol.area !"未知"}</span>&nbsp;<span
                 class="text-muted ">年份: ${videoCol.year !"未知"}</span>
@@ -77,16 +72,10 @@
     <div class="row">
         <br>
         <h4>播放列表</h4>
-        <ul class="list-inline">
+        <ul id="playlist" class="list-inline">
             <#list videoList as vd>
-                <#if video.videoId == vd.videoId >
-                    <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
-                                                           class="badge badge-primary p-2">${vd.orderName !"未知"}</a>
-                    </li>
-                <#else>
                     <li class="list-inline-item border"><a href="/video/${vd.videoId?c}"
                                                            class="badge badge-light p-2 ">${vd.orderName !"未知"}</a></li>
-                </#if>
             </#list>
         </ul>
 
@@ -108,31 +97,34 @@
 
 </body>
 
-<script src="/statics/js/jquery-3.2.1.slim.min.js"></script>
+<script src="/statics/js/jquery-3.4.1.min.js"></script>
 <script src="/statics/js/boostrap-4.0.0.min.js"></script>
 <script src="/statics/js/popper-1.12.9.min.js"></script>
-<script src="/statics/h_media/js/index.js"></script>
+<script src="/statics/h_media/js/play.js"></script>
 
 <script>
-    function t6(e) {
-        return e > 64 && e < 91 ? e - 65 : e > 96 && e < 123 ? e - 71 : e > 47 && e < 58 ? e + 4 : 43 === e ? 62 : 47 === e ? 63 : 0
-    }
-
-    function bArr(e, n) {
-        for (var t, i, r = e.replace(/[^A-Za-z0-9\+\/]/g, ""), o = r.length, a = n ? Math.ceil((3 * o + 1 >>> 2) / n) * n : 3 * o + 1 >>> 2, l = new Uint8Array(a), c = 0, d = 0, s = 0; s < o; s++) if (i = 3 & s, c |= t6(r.charCodeAt(s)) << 18 - 6 * i, 3 === i || o - s == 1) {
-            for (t = 0; t < 3 && d < a; t++, d++) l[d] = c >>> (16 >>> t & 24) & 255;
-            c = 0
-        }
-        return l
-    }
-
-    function getLink() {
-        return bArr("${video.link}").toLocaleString().split(",").map(e => String.fromCharCode(parseInt(e))).join("")
-    }
 
     $(function () {
-        let e = '<video-js id=example-video width=960 height=540 class="vjs-default-skin" controls>\n            <source\n                    src="' + getLink() + '"\n                    type="application/x-mpegURL">\n        </video-js>';
-        $("#video").html(e), videojs("example-video").play()
-    });
+            let vid = window.location.pathname.split("/")[3];
+            $.post("/video/" + vid,
+                {"code":  getbres(myenc(vid + Date.parse(new Date()).toString().substring(0, 8)))})
+                .done(function (video) {
+
+                    $("#info span").first().text(video.orderName);
+
+                    $(`#playlist li:eq(video.videoOrder -1) a`).attr("class", "badge badge-primary p-2");
+                    $("#video").html(" <video-js id=example-video width=960 height=540 class=\"vjs-default-skin\" controls>\n" +
+                        "            <source\n" +
+                        "                    src=\"  " + video.link +
+                        "\"\n" +
+                        "                    type=\"application/x-mpegURL\">\n" +
+                        "        </video-js>");
+
+                    videojs('example-video').play();
+                });
+        }
+    )
+
+
 </script>
 </html>

@@ -165,11 +165,11 @@
 </body>
 
 
-<script src="/statics/js/jquery-3.2.1.slim.min.js"></script>
+<script src="/statics/js/jquery-3.4.1.min.js"></script>
 <script src="/statics/js/boostrap-4.0.0.min.js"></script>
 <script src="/statics/js/popper-1.12.9.min.js"></script>
 <script src="/statics/h_media/js/album.js"></script>
-<script src="/statics/h_media/js/index.js"></script>
+<script src="/statics/h_media/js/play.js"></script>
 <script>
     let curUrl = decodeURIComponent(window.location.href);
     let isNoChooesd = curUrl.indexOf("?") === -1;
