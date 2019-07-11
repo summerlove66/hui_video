@@ -106,8 +106,6 @@
                                     <directory>${basedir}/src/main/resources</directory>
                                     <includes>
                                         <include>*.properties</include>
-                                        <include>templates/*</include>
-                                        <include>statics/**</include>
                                         <include>*.yml</include>
                                     </includes>
                                 </resource>
