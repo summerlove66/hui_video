@@ -28,6 +28,7 @@ public class VideoColSqlProvider {
         if(videoColumn.getYear() !=0){
             sql.append(" AND year=#{year}");
         }
+
         System.out.println("SQL " +sql.toString());
         return sql.toString();
 

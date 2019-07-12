@@ -20,8 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul id="videoType" class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link font-weight-bold" href="#">首页<span
-                                class="sr-only">(current)</span></a>
+                    <a class="nav-link font-weight-bold" href="/cols">首页</a>
                 </li>
                 <li class="nav-item text-weight-bold">
                     <a class="nav-link font-weight-bold " href="/cols?videoType=福利">福利</a>
