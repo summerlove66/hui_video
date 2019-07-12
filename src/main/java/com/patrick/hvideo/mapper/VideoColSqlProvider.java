@@ -29,7 +29,10 @@ public class VideoColSqlProvider {
             sql.append(" AND year=#{year}");
         }
 
+        sql.append(" ORDER BY id DESC");
+
         System.out.println("SQL " +sql.toString());
+
         return sql.toString();
 
 

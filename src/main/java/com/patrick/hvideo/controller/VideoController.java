@@ -4,8 +4,10 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.patrick.hvideo.mapper.VideoColumnMapper;
 import com.patrick.hvideo.mapper.VideoMapper;
+import com.patrick.hvideo.mapper.VideoUpDateInfoMapper;
 import com.patrick.hvideo.model.Video;
 import com.patrick.hvideo.model.VideoColumn;
+import com.patrick.hvideo.model.VideoUpdateInfo;
 import com.patrick.hvideo.utils.EncryptUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ public class VideoController {
     private VideoMapper videoMapper;
     @Resource
     private VideoColumnMapper videoColumnMapper;
+    @Resource
+    private VideoUpDateInfoMapper videoUpDateInfoMapper;
 
     @Value("${page.size}")
     private int pageSize;
@@ -75,10 +79,13 @@ public class VideoController {
 
         System.out.println("VIDEOCOLUMN " + videoColumn);
         List<VideoColumn> videoColumnList;
+        Integer updateData = videoUpDateInfoMapper .getUpdateData();
 
+        System.out.println(updateData  +"========================================");
         PageHelper.startPage(pageNum, pageSize);
         videoColumnList = videoColumnMapper.findVideoColByRange(videoColumn);
         model.addAttribute("videoColumnList", videoColumnList);
+        model.addAttribute("updateData" ,updateData);
         return "album";
 
     }

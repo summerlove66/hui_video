@@ -56,8 +56,9 @@
 
 
     <div class="row" style="height: 50px">
-
-        <i>今日更新： </i>
+        <div class="col-md-2 offset-10">
+            <p  id="update" class="text-right font-weight-bold text-info mt-2"> </p>
+        </div>
     </div>
 
     <div id="choose" class="row">
@@ -177,12 +178,6 @@
 
     pageSetup();
 
-    function fx() {
-
-
-        alert("hello world");
-    }
-
 
     $(
         function () {
@@ -197,7 +192,14 @@
                 function () {
                     window.location.href = urlInfo.url.replace("pn=" + pn, "pn=" + $("#page li input").last().val());
                 }
-            )
+            );
+
+            if (curUrl .endsWith("cols")){
+                if ( parseInt(${updateData}) > 0 ){
+                    $("#update").text("今日更新：" +${updateData?c})
+                }
+
+            }
 
         }
     )

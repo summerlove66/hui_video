@@ -6,7 +6,6 @@ public class VideoUpdateInfo {
     private int id;
     private Date addTime;
     private String source;
-
     private int data;
 
     public int getId() {
