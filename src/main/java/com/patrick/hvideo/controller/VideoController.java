@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -36,8 +37,8 @@ public class VideoController {
     @PostMapping("/video/{videoId}")
     @ResponseBody
     private Video getVideoById(@PathVariable("videoId") int videoId, @RequestParam("code") String code) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        String myCode = EncryptUtils.getCode(videoId+"");
-        System.out.println(code +"+++"+myCode);
+        String myCode = EncryptUtils.getCode(videoId + "");
+        System.out.println(code + "+++" + myCode);
         if (!myCode.equals(code)) {
             return null;
         }
@@ -49,7 +50,9 @@ public class VideoController {
 
     @GetMapping("/video/{colId}/{numericId:[\\d]+}")
 
-    public String getVideoByID(@PathVariable("colId") int colId, Model model ) {
+    public String getVideoByID(@PathVariable("colId") int colId, Model model) {
+
+
         VideoColumn videoColumn = videoColumnMapper.findVideoColumnById(colId);
         List<Video> videoList = videoMapper.findBySourceAndDataId(videoColumn.getSource(), videoColumn.getDataId());
         model.addAttribute("videoList", videoList);
@@ -75,17 +78,19 @@ public class VideoController {
     @GetMapping("cols")
 
     public String getVideoColumnByPage(@RequestParam(name = "pn", defaultValue = "1", required = false) int pageNum, Model model,
-                                       VideoColumn videoColumn) {
+                                       VideoColumn videoColumn, HttpServletRequest request) {
 
         System.out.println("VIDEOCOLUMN " + videoColumn);
         List<VideoColumn> videoColumnList;
-        Integer updateData = videoUpDateInfoMapper .getUpdateData();
 
-        System.out.println(updateData  +"========================================");
         PageHelper.startPage(pageNum, pageSize);
         videoColumnList = videoColumnMapper.findVideoColByRange(videoColumn);
         model.addAttribute("videoColumnList", videoColumnList);
-        model.addAttribute("updateData" ,updateData);
+        if (request.getParameterMap().entrySet().isEmpty()) {
+            Integer updateData = videoUpDateInfoMapper.getUpdateData();
+            System.out.println(updateData + "========================================");
+            model.addAttribute("updateData", updateData);
+        }
         return "album";
 
     }

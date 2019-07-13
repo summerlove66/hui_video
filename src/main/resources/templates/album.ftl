@@ -57,7 +57,7 @@
 
     <div class="row" style="height: 50px">
         <div class="col-md-2 offset-10">
-            <p  id="update" class="text-right font-weight-bold text-info mt-2"> </p>
+            <p id="update" class="text-right font-weight-bold text-info mt-2"></p>
         </div>
     </div>
 
@@ -194,15 +194,16 @@
                 }
             );
 
-            if (curUrl .endsWith("cols")){
-                if ( parseInt(${updateData}) > 0 ){
+            if (curUrl.endsWith("cols")) {
+                <#if updateData??>
+                if (parseInt(${updateData?c}) > 0) {
                     $("#update").text("今日更新：" +${updateData?c})
                 }
-
+                </#if>
             }
 
         }
     )
 </script>
 <
-/html>
+</html>
