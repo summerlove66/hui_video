@@ -6,7 +6,7 @@ public class VideoColSqlProvider {
 
     public String selector(VideoColumn videoColumn) {
         StringBuilder sql = new StringBuilder("SELECT * FROM video_column WHERE 1=1");
-        if (videoColumn ==null){
+        if (videoColumn == null) {
             return sql.toString();
         }
 
@@ -16,22 +16,23 @@ public class VideoColSqlProvider {
         if (videoColumn.getArea() != null) {
             sql.append(" AND area =#{area}");
         }
-        if (videoColumn.getCast() !=null){
-            sql.append(" AND cast Like CONCAT('%',#{cast},'%')" );
+
+        if (videoColumn.getContType() != null) {
+            sql.append(" AND cont_type =#{contType}");
         }
-        if (videoColumn.getContType()!=null){
-            sql.append(" AND cont_type =#{contType}" );
-        }
-        if (videoColumn.getTitle() !=null){
-            sql.append(" AND title LIKE CONCAT('%',#{title},'%')" );
-        }
-        if(videoColumn.getYear() !=0){
+
+        if (videoColumn.getYear() != 0) {
             sql.append(" AND year=#{year}");
         }
-
+        if (videoColumn.getCast() != null) {
+            sql.append(" AND cast Like CONCAT('%',#{cast},'%')");
+        }
+        if (videoColumn.getTitle() != null) {
+            sql.append(" OR title LIKE CONCAT('%',#{title},'%')");
+        }
         sql.append(" ORDER BY id DESC");
 
-        System.out.println("SQL " +sql.toString());
+        System.out.println("SQL " + sql.toString());
 
         return sql.toString();
 

@@ -46,24 +46,58 @@ function chooseUrl() {
     }
 
 }
+
+function mark(key, noIndex, ele, inside_ele, className) {
+    if (urlInfo[key]) {
+
+
+        $(ele).text(function (index) {
+            let li = ele + `:eq(${index}) `;
+            if ($(li + inside_ele).text() === urlInfo[key]) {
+
+                $(li).addClass(className);
+            }
+        })
+    } else {
+        $(ele + `:eq(${noIndex})`).addClass(className);
+    }
+}
+
 function pageSetup() {
     let preLink, nextLink, firstLink;
     firstLink = urlInfo.url.replace("pn=" + pn, "pn=1");
     nextLink = urlInfo.url.replace("pn=" + pn, "pn=" + (pn + 1));
 
+    //page
     if (pn > 1) {
         preLink = urlInfo.url.replace("pn=" + pn, "pn=" + (pn - 1));
 
         $("#page li:eq(1) button a").attr("href", preLink);
 
     }
+    //search
+    if (urlInfo.search) {
+        $("form input").val("当前：" + urlInfo.search).addClass("text-danger font-weight-bold").mouseover(
+            function () {
+                $("small").fadeIn(3000).fadeOut(1000);
+            }
 
-    if (urlInfo.title) {
-        $("form input").val(urlInfo.title);
+        )
     }
+
+
     $("#page li:eq(0) button a").attr("href", firstLink);
     $("#page li:eq(2) button a").html(pn);
     $("#page li:eq(3) button a").attr("href", nextLink);
 
+    //types
+
+
+    mark("videoType", 0, "#videoType li", "#a", "bg-primary");
+    mark("contType", 1, "#contType li", "", "text-primary font-weight-bold");
+    mark("area", 1, "#area li", "", "text-primary font-weight-bold");
+
 
 }
+
+

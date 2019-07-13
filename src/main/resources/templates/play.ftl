@@ -44,7 +44,7 @@
                 </li>
             </ul>
             <form action="/cols?" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" name="title" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="片名/演员" aria-label="Search">
                 <button id="search" type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
             </form>
 

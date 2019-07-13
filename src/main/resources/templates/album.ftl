@@ -26,7 +26,7 @@
                     <a class="nav-link font-weight-bold" href="/cols">首页</a>
                 </li>
                 <li class="nav-item text-weight-bold">
-                    <a class="nav-link font-weight-bold " href="/cols?videoType=福利">福利</a>
+                    <a class="nav-link font-weight-bold" name="福利" href="/cols?videoType=福利">福利</a>
                 </li>
 
                 <li class="nav-item text-weight-bold">
@@ -47,7 +47,7 @@
                 </li>
             </ul>
             <form action="/cols?" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" name="title" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="片名/演员" aria-label="Search">
                 <button id="search" type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
             </form>
 
@@ -57,6 +57,7 @@
 
     <div class="row" style="height: 50px">
         <div class="col-md-2 offset-10">
+            <small style="display: none">如想抛弃本次搜索，请清空搜索框点击搜索 </small>
             <p id="update" class="text-right font-weight-bold text-info mt-2"></p>
         </div>
     </div>
@@ -66,8 +67,8 @@
         <ul id="contType" class="list-inline">
             <li class="list-inline-item p-2"><span class="text-muted ">分类</span></li>
             <li class="list-inline-item p-2">不限</li>
-            <li class="list-inline-item  p-2 ">动作</li>
-            <li class="list-inline-item p-2">喜剧</li>
+            <li class="list-inline-item  p-2">动作</li>
+            <li class="list-inline-item p-2" >喜剧</li>
             <li class="list-inline-item p-2">恐怖</li>
             <li class="list-inline-item p-2">爱情</li>
             <li class="list-inline-item p-2">剧情</li>

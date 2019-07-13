@@ -77,9 +77,14 @@ public class VideoController {
 
     @GetMapping("cols")
 
-    public String getVideoColumnByPage(@RequestParam(name = "pn", defaultValue = "1", required = false) int pageNum, Model model,
+    public String getVideoColumnByPage(@RequestParam(name = "pn", defaultValue = "1", required = false) int pageNum,
+                                       @RequestParam(value ="search",required = false) String search,Model model,
                                        VideoColumn videoColumn, HttpServletRequest request) {
 
+        if (search !=null){
+            videoColumn.setCast(search);
+            videoColumn.setTitle(search);
+        }
         System.out.println("VIDEOCOLUMN " + videoColumn);
         List<VideoColumn> videoColumnList;
 
