@@ -19,7 +19,8 @@ let urlInfo = function () {
             urlInfo['url'] = curUrl + "&pn=1";
         }
     } else {
-        urlInfo['url'] =curUrl;
+        urlInfo['url'] = curUrl;
+        urlInfo.pn = parseInt(urlInfo.pn);
     }
     return urlInfo;
 }();
@@ -102,9 +103,11 @@ function pageSetup() {
 // url jump
     $("#navbarSupportedContent ul li").click(chooseUrl);
 
-    $("#choose ul li").click(
-        chooseUrl
-    );
+    for (let i; i++; i < $("#choose ul").length) {
+        $(`#choose ul:eq(${i}) li:gt(1)`).click(chooseUrl);
+
+
+    }
 //skip
     $("#skip-page").click(
         function () {
