@@ -63,7 +63,7 @@
         <span class="text-muted">未知</span> &nbsp;<span
                 class="text-muted">类型：${videoCol.contType !"未知" }</span>&nbsp;<span
                 class="text-muted">地区: ${videoCol.area !"未知"}</span>&nbsp;<span
-                class="text-muted ">年份: ${videoCol.year !"未知"}</span>
+                class="text-muted ">年份: ${videoCol.year?c !"未知"}</span>
 
     </div>
 
@@ -73,7 +73,7 @@
         <h4>播放列表</h4>
         <ul id="playlist" class="list-inline">
             <#list videoList as vd>
-                <li class="list-inline-item border"><a href="/video/${videoCol.id}/${vd.videoId?c}"
+                <li class="list-inline-item border"><a href="/video/${videoCol.id?c}/${vd.videoId?c}"
                                                        class="badge badge-light p-2 ">${vd.orderName !"未知"}</a></li>
             </#list>
         </ul>

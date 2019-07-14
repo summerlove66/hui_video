@@ -1,26 +1,29 @@
-function parseUrl(ur) {
+let curUrl = decodeURIComponent(window.location.href);
+let isNoChooesd = curUrl.indexOf("?") === -1;
+
+let urlInfo = function () {
     let urlInfo = {};
-    infoArray = ur.split(new RegExp("\\?|&")).slice(1);
+    infoArray = curUrl.split(new RegExp("\\?|&")).slice(1);
     for (let i in  infoArray) {
         let kv = infoArray[i].split("=");
 
         console.log(kv);
         urlInfo[kv[0]] = kv[1];
-
     }
     if (!urlInfo.pn) {
         urlInfo.pn = 1;
 
         if (isNoChooesd) {
-            urlInfo['url'] = ur + "?pn=1";
+            urlInfo['url'] = curUrl + "?pn=1";
         } else {
-            urlInfo['url'] = ur + "&pn=1";
+            urlInfo['url'] = curUrl + "&pn=1";
         }
     } else {
-        urlInfo['url'] = ur;
+        urlInfo['url'] =curUrl;
     }
     return urlInfo;
-}
+}();
+
 
 function chooseUrl() {
     $(this).addClass("bg-primary");
@@ -48,6 +51,7 @@ function chooseUrl() {
 }
 
 function mark(key, noIndex, ele, inside_ele, className) {
+
     if (urlInfo[key]) {
 
 
@@ -65,37 +69,48 @@ function mark(key, noIndex, ele, inside_ele, className) {
 
 function pageSetup() {
     let preLink, nextLink, firstLink;
-    firstLink = urlInfo.url.replace("pn=" + pn, "pn=1");
-    nextLink = urlInfo.url.replace("pn=" + pn, "pn=" + (pn + 1));
+    firstLink = urlInfo.url.replace("pn=" + urlInfo.pn, "pn=1");
+    nextLink = urlInfo.url.replace("pn=" + urlInfo.pn, "pn=" + (urlInfo.pn + 1));
 
     //page
-    if (pn > 1) {
-        preLink = urlInfo.url.replace("pn=" + pn, "pn=" + (pn - 1));
+    if (urlInfo.pn > 1) {
+        preLink = urlInfo.url.replace("pn=" + urlInfo.pn, "pn=" + (urlInfo.pn - 1));
 
         $("#page li:eq(1) button a").attr("href", preLink);
 
     }
     //search
     if (urlInfo.search) {
-        $("form input").val("当前：" + urlInfo.search).addClass("text-danger font-weight-bold").mouseover(
+        $("form input").val(urlInfo.search).addClass("text-danger").mouseover(
             function () {
                 $("small").fadeIn(3000).fadeOut(1000);
             }
-
         )
     }
 
-
+    //page indicator
     $("#page li:eq(0) button a").attr("href", firstLink);
-    $("#page li:eq(2) button a").html(pn);
+    $("#page li:eq(2) button a").html(urlInfo.pn);
     $("#page li:eq(3) button a").attr("href", nextLink);
 
-    //types
-
-
-    mark("videoType", 0, "#videoType li", "#a", "bg-primary");
+    //types marked
+    mark("videoType", 0, "#videoType li", " a", "bg-primary");
     mark("contType", 1, "#contType li", "", "text-primary font-weight-bold");
     mark("area", 1, "#area li", "", "text-primary font-weight-bold");
+
+
+// url jump
+    $("#navbarSupportedContent ul li").click(chooseUrl);
+
+    $("#choose ul li").click(
+        chooseUrl
+    );
+//skip
+    $("#skip-page").click(
+        function () {
+            window.location.href = urlInfo.url.replace("pn=" + urlInfo.pn, "pn=" + $("#page li input").last().val());
+        }
+    );
 
 
 }

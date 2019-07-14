@@ -70,14 +70,15 @@
             <li><span class="text-muted">导演:</span></li>
             <li><span class="text-muted">类型:</span> ${videoCol.contType !"未知" } <span
                         class="text-muted">地区: </span>${videoCol.area !"未知"}<span
-                        class="text-muted">年份:</span> ${videoCol.year !"未知" }</li>
+                        class="text-muted">年份:</span> ${videoCol.year?c !"未知" }</li>
             <li><span class="text-muted">简介:</span>
                 <p>
 
                     ${videoCol.info !"未知"}
                 </p></li>
             <li>
-                <a class="p-2 bg-primary text-light font-weight-bold rounded" href="/video/${videoCol.id ?c}/${videoList[0].videoId ?c}">播放</a>
+                <a class="p-2 bg-primary text-light font-weight-bold rounded"
+                   href="/video/${videoCol.id ?c}/${videoList[0].videoId ?c}">播放</a>
             </li>
         </ul>
 
@@ -87,16 +88,13 @@
         <h4>播放列表</h4>
         <ul class="list-inline">
             <#list videoList as vd>
-                    <li class="list-inline-item border"><a href="/video/${videoCol.id?c}/${vd.videoId?c}"
-                                                           class="badge badge-light p-2 ml-2 ">${vd.orderName}</a></li>
+                <li class="list-inline-item border"><a href="/video/${videoCol.id?c}/${vd.videoId?c}"
+                                                       class="badge badge-light p-2">${vd.orderName}</a></li>
             </#list>
         </ul>
-
-
     </div>
 
     <div class="row">
-
 
         <hr>
         <p class="text-secondary">

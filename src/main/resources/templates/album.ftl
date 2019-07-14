@@ -37,7 +37,6 @@
                     <a class="nav-link font-weight-bold " href="/cols?videoType=电视剧">电视剧</a>
                 </li>
 
-
                 <li class="nav-item">
                     <a class="nav-link font-weight-bold " href="/cols?videoType=动漫&pn=1">动漫</a>
                 </li>
@@ -50,25 +49,23 @@
                 <input class="form-control mr-sm-2" type="search" name="search" placeholder="片名/演员" aria-label="Search">
                 <button id="search" type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
             </form>
-
         </div>
     </nav>
 
 
     <div class="row" style="height: 50px">
         <div class="col-md-2 offset-10">
-            <small style="display: none">如想抛弃本次搜索，请清空搜索框点击搜索 </small>
+            <small style="display: none">放弃本次搜索 需清空搜索框 回车</small>
             <p id="update" class="text-right font-weight-bold text-info mt-2"></p>
         </div>
     </div>
 
     <div id="choose" class="row">
-
         <ul id="contType" class="list-inline">
             <li class="list-inline-item p-2"><span class="text-muted ">分类</span></li>
             <li class="list-inline-item p-2">不限</li>
             <li class="list-inline-item  p-2">动作</li>
-            <li class="list-inline-item p-2" >喜剧</li>
+            <li class="list-inline-item p-2">喜剧</li>
             <li class="list-inline-item p-2">恐怖</li>
             <li class="list-inline-item p-2">爱情</li>
             <li class="list-inline-item p-2">剧情</li>
@@ -89,15 +86,11 @@
             <li class="list-inline-item p-2">法国</li>
             <li class="list-inline-item p-2">西班牙</li>
             <li class="list-inline-item p-2">加拿大</li>
-
         </ul>
-
-
     </div>
 
 
     <div class="row">
-
         <#list videoColumnList as videoCol >
             <div class="col-xl-2 col-md-3 col-sm-4 ">
                 <a href="/col/${videoCol.id?c}" style="position: relative">
@@ -172,30 +165,11 @@
 <script src="/statics/h_media/js/album.js"></script>
 <script src="/statics/h_media/js/play.js"></script>
 <script>
-    let curUrl = decodeURIComponent(window.location.href);
-    let isNoChooesd = curUrl.indexOf("?") === -1;
-    let urlInfo = parseUrl(curUrl);
-    let pn = parseInt(urlInfo.pn);
-
-    pageSetup();
-
 
     $(
         function () {
-// if( $("#area li")
-            $("#navbarSupportedContent ul li").click(chooseUrl);
-
-            $("#choose ul li").click(
-                chooseUrl
-            );
-//skip
-            $("#skip-page").click(
-                function () {
-                    window.location.href = urlInfo.url.replace("pn=" + pn, "pn=" + $("#page li input").last().val());
-                }
-            );
-
-            if (curUrl.endsWith("cols")) {
+            pageSetup();
+            if (window.location.href.endsWith("cols")) {
                 <#if updateData??>
                 if (parseInt(${updateData?c}) > 0) {
                     $("#update").text("今日更新：" +${updateData?c})
