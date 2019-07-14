@@ -103,8 +103,8 @@ function pageSetup() {
 // url jump
     $("#navbarSupportedContent ul li").click(chooseUrl);
 
-    for (let i; i++; i < $("#choose ul").length) {
-        $(`#choose ul:eq(${i}) li:gt(1)`).click(chooseUrl);
+    for (let i=0; i < $("#choose ul").length ;i++) {
+        $(`#choose ul:eq(${i}) li:gt(0)`).click(chooseUrl);
 
 
     }
