@@ -23,9 +23,7 @@
                 <li class="nav-item active">
                     <a class="nav-link font-weight-bold" href="/cols">首页</a>
                 </li>
-                <li class="nav-item text-weight-bold">
-                    <a class="nav-link font-weight-bold " href="/cols?videoType=福利">福利</a>
-                </li>
+
 
                 <li class="nav-item text-weight-bold">
                     <a class="nav-link font-weight-bold" href="/cols?videoType=电影">电影</a>
@@ -43,6 +41,11 @@
                 <li class="nav-item">
                     <a class="nav-link font-weight-bold" href="/cols?videoType=综艺&pn=1">综艺</a>
                 </li>
+
+                <li class="nav-item text-weight-bold">
+                    <a class="nav-link font-weight-bold " href="/cols?videoType=福利">福利</a>
+                </li>
+
             </ul>
             <form action="/cols?" class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" name="search" placeholder="片名/演员" aria-label="Search">

@@ -22,11 +22,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul id="videoType" class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link font-weight-bold" href="/cols">首页</a>
                 </li>
 
-                <li class="nav-item text-weight-bold">
+                <li class="nav-item">
                     <a class="nav-link font-weight-bold" href="/cols?videoType=电影">电影</a>
                 </li>
 

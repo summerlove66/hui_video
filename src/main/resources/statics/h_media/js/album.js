@@ -51,7 +51,7 @@ function chooseUrl() {
 
 }
 
-function mark(key, noIndex, ele, inside_ele, className) {
+function mark(key, noIndex, ele, inside_ele, className, insideClassName) {
 
     if (urlInfo[key]) {
 
@@ -61,10 +61,12 @@ function mark(key, noIndex, ele, inside_ele, className) {
             if ($(li + inside_ele).text() === urlInfo[key]) {
 
                 $(li).addClass(className);
+                $(li + inside_ele).addClass(insideClassName)
             }
         })
     } else {
         $(ele + `:eq(${noIndex})`).addClass(className);
+        $(ele + `:eq(${noIndex})` + inside_ele).addClass(insideClassName)
     }
 }
 
@@ -95,15 +97,16 @@ function pageSetup() {
     $("#page li:eq(3) button a").attr("href", nextLink);
 
     //types marked
-    mark("videoType", 0, "#videoType li", " a", "bg-primary");
-    mark("contType", 1, "#contType li", "", "text-primary font-weight-bold");
-    mark("area", 1, "#area li", "", "text-primary font-weight-bold");
+    mark("videoType", 0, "#videoType li", " a", "bg-primary", " text-light");
+    mark("videoType", 0, "#videoType li a", " a", "bg-primary", "");
+    mark("contType", 1, "#contType li", "", "text-primary font-weight-bold", "");
+    mark("area", 1, "#area li", "", "text-primary font-weight-bold", "");
 
 
 // url jump
     $("#navbarSupportedContent ul li").click(chooseUrl);
 
-    for (let i=0; i < $("#choose ul").length ;i++) {
+    for (let i = 0; i < $("#choose ul").length; i++) {
         $(`#choose ul:eq(${i}) li:gt(0)`).click(chooseUrl);
 
 
