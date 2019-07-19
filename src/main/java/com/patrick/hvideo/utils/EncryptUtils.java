@@ -34,7 +34,9 @@ public class EncryptUtils {
     }
 
     public  static String getCode(String str) throws NoSuchAlgorithmException {
-        return EncryptUtils.decodeBase64ToArryStr(EncryptUtils.getMD5(str+ String.valueOf(new Date().getTime()).substring(0,8)));
+        String timeStamp = String.valueOf(new Date().getTime()).substring(0,7);
+        System.out.println(timeStamp);
+        return EncryptUtils.decodeBase64ToArryStr(EncryptUtils.getMD5(str+ timeStamp));
     }
 
 
