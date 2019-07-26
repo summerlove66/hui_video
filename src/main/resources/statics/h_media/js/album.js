@@ -114,7 +114,11 @@ function pageSetup() {
 //skip
     $("#skip-page").click(
         function () {
-            window.location.href = urlInfo.url.replace("pn=" + urlInfo.pn, "pn=" + $("#page li input").last().val());
+            let  targetPage =parseInt( $("#page li input").last().val());
+            if (targetPage >0 ) {
+
+                window.location.href = urlInfo.url.replace("pn=" + urlInfo.pn, "pn=" + targetPage);
+            }
         }
     );
 
