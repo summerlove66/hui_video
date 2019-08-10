@@ -1,25 +1,20 @@
 package com.patrick.hvideo.controller;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.patrick.hvideo.mapper.VideoColumnMapper;
 import com.patrick.hvideo.mapper.VideoMapper;
 import com.patrick.hvideo.mapper.VideoUpDateInfoMapper;
 import com.patrick.hvideo.model.Video;
 import com.patrick.hvideo.model.VideoColumn;
-import com.patrick.hvideo.model.VideoUpdateInfo;
 import com.patrick.hvideo.utils.EncryptUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -50,10 +45,11 @@ public class VideoController {
 
     @GetMapping("/video/{colId}/{numericId:[\\d]+}")
 
-    public String getVideoByID(@PathVariable("colId") int colId, Model model) {
-
+    public String getVideoByID(@PathVariable("colId") int colId, Model model, HttpServletRequest request) {
 
         VideoColumn videoColumn = videoColumnMapper.findVideoColumnById(colId);
+        System.out.println("IP : " + request.getHeader("X-Forwarded-For ")
+                + " MOVIE : " + videoColumn.getTitle() + " DATAID : " + videoColumn.getDataId());
         List<Video> videoList = videoMapper.findBySourceAndDataId(videoColumn.getSource(), videoColumn.getDataId());
         model.addAttribute("videoList", videoList);
         model.addAttribute("videoCol", videoColumn);
@@ -65,8 +61,6 @@ public class VideoController {
 
     public String getVideoColByID(@PathVariable int videoColId, Model model) {
         VideoColumn videoColumn = videoColumnMapper.findVideoColumnById(videoColId);
-
-        System.out.println("VideoCOL" + videoColumn);
         List<Video> videoList = videoMapper.findBySourceAndDataId(videoColumn.getSource(), videoColumn.getDataId());
         model.addAttribute("video", videoList.get(0));
         model.addAttribute("videoList", videoList);
@@ -78,10 +72,10 @@ public class VideoController {
     @GetMapping("cols")
 
     public String getVideoColumnByPage(@RequestParam(name = "pn", defaultValue = "1", required = false) int pageNum,
-                                       @RequestParam(value ="search",required = false) String search,Model model,
+                                       @RequestParam(value = "search", required = false) String search, Model model,
                                        VideoColumn videoColumn, HttpServletRequest request) {
 
-        if (search !=null){
+        if (search != null) {
             videoColumn.setCast(search);
             videoColumn.setTitle(search);
         }
@@ -93,7 +87,6 @@ public class VideoController {
         model.addAttribute("videoColumnList", videoColumnList);
         if (request.getParameterMap().entrySet().isEmpty()) {
             Integer updateData = videoUpDateInfoMapper.getUpdateData();
-            System.out.println(updateData + "========================================");
             model.addAttribute("updateData", updateData);
         }
         return "album";
